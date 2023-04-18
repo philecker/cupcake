@@ -1,5 +1,26 @@
 {
   "dependencies": {
     "menubar": "^9.2.3"
+  },
+  "name": "cupcake",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philecker/cupcake.git"
+  },
+  "author": "Phil Ecker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philecker/cupcake/issues"
+  },
+  "homepage": "https://github.com/philecker/cupcake#readme",
+  "devDependencies": {
+    "electron": "^21.4.4"
   }
 }
