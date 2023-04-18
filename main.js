@@ -26,17 +26,19 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  if (app.dock) app.dock.hide();
+
   createWindow()
 
   tray = new Tray('./cupcakeTemplate.png')
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },
-    { label: 'Item4', type: 'radio' }
-  ])
-  tray.setToolTip('This is my application.')
-  tray.setContextMenu(contextMenu)
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'Quit',
+      click() { app.quit(); }
+    }
+  ]);
+  tray.setToolTip('Cupcake')
+  tray.setContextMenu(menu)
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
