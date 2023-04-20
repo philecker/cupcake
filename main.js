@@ -1,6 +1,7 @@
 // main.js
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu, Tray } = require('electron')
+const positioner = require('electron-traywindow-positioner');
 const path = require('path')
 
 let tray = null;
@@ -47,22 +48,28 @@ app.whenReady().then(() => {
 
   tray = new Tray('./cupcakeTemplate.png')
   tray.setToolTip('Cupcake')
-  // tray.setContextMenu(menu)
+
+  positioner.position(mainWindow, tray.getBounds());
 
   tray.on('click', () => {
+
     console.log('👋')
-    toggleWindow();
+    if (mainWindow.isVisible()) {
+      mainWindow.hide()
+    } else {
+      mainWindow.show()
+    }
   })
 
-  // tray.on('right-click', () => {
-  //   const menu = Menu.buildFromTemplate([
-  //     {
-  //       label: 'Quit',
-  //       click() { app.quit(); }
-  //     }
-  //   ]);
-  //   tray.popUpContextMenu(menu)
-  // })
+  tray.on('right-click', () => {
+    const menu = Menu.buildFromTemplate([
+      {
+        label: 'Quit',
+        click() { app.quit(); }
+      }
+    ]);
+    tray.popUpContextMenu(menu)
+  })
 })
 
 
