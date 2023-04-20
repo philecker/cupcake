@@ -4,12 +4,25 @@ const { app, BrowserWindow, Menu, Tray } = require('electron')
 const path = require('path')
 
 let tray = null;
+let mainWindow = null;
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+  mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
+    minWidth: 270,
+    minHeight: 170,
+    maxWidth: 270,
+    maxHeight: 170,
+    width: 270,
+    height: 170,
+    show: false,
+    frame: false,
+    tray: true,
+    closable: false,
+    minimizable: false,
+    maximizable: false,
+    fullscreenable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -17,7 +30,9 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-
+  mainWindow.setMenu(null);
+  mainWindow.hide();
+  mainWindow.removeMenu()
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -31,15 +46,32 @@ app.whenReady().then(() => {
   createWindow()
 
   tray = new Tray('./cupcakeTemplate.png')
-  const menu = Menu.buildFromTemplate([
-    {
-      label: 'Quit',
-      click() { app.quit(); }
-    }
-  ]);
   tray.setToolTip('Cupcake')
-  tray.setContextMenu(menu)
+  // tray.setContextMenu(menu)
+
+  tray.on('click', () => {
+    console.log('👋')
+    toggleWindow();
+  })
+
+  // tray.on('right-click', () => {
+  //   const menu = Menu.buildFromTemplate([
+  //     {
+  //       label: 'Quit',
+  //       click() { app.quit(); }
+  //     }
+  //   ]);
+  //   tray.popUpContextMenu(menu)
+  // })
 })
+
+
+
+const toggleWindow = () => {
+  if (mainWindow.isVisible()) return mainWindow.hide();
+  // mainWindow.webContents.openDevTools()
+  return mainWindow.show();
+};
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
