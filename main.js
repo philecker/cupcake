@@ -1,15 +1,14 @@
 // main.js
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu, Tray } = require('electron')
-const positioner = require('electron-traywindow-positioner');
 const path = require('path')
 
 let tray = null;
-let mainWindow = null;
+let browserWindow = null;
 
 const createWindow = () => {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  browserWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
     minWidth: 270,
     minHeight: 170,
@@ -30,55 +29,74 @@ const createWindow = () => {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-  mainWindow.setMenu(null);
-  mainWindow.hide();
-  mainWindow.removeMenu()
+  browserWindow.loadFile('index.html')
+  browserWindow.setMenu(null);
+  browserWindow.hide();
+  browserWindow.removeMenu()
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  browserWindow.openDevTools({detached: true})
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  if (app.dock) app.dock.hide();
-
-  createWindow()
-
   tray = new Tray('./cupcakeTemplate.png')
   tray.setToolTip('Cupcake')
 
-  positioner.position(mainWindow, tray.getBounds());
+  if (app.dock) app.dock.hide();
+  createWindow()
+
+  // const trayBounds = tray.getBounds();
+  // const windowBounds = browserWindow.getBounds();
+  // console.log(trayBounds);
+  // console.log(windowBounds);
+  // const x = Math.round(trayBounds.x);
+  // const y = Math.round(trayBounds.y);
+  // console.log(x);
+  // console.log(y);
+  // browserWindow.setPosition(0, y, false);
+
+  // position electron window realitive to tray icon
+  const positionWindow = () => {
+    const windowBounds = browserWindow.getBounds();
+    const trayBounds = tray.getBounds();
+
+    // Center window horizontally below the tray icon
+    const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
+
+    // Position window 4 pixels vertically below the tray icon
+    const y = Math.round(trayBounds.y + trayBounds.height + 4);
+
+    browserWindow.setPosition(x, y, false);
+  }
+
+
 
   tray.on('click', () => {
-
-    console.log('👋')
-    if (mainWindow.isVisible()) {
-      mainWindow.hide()
+    if (browserWindow.isVisible()) {
+      browserWindow.hide();
     } else {
-      mainWindow.show()
+      browserWindow.show();
+      positionWindow();
     }
   })
 
   tray.on('right-click', () => {
-    const menu = Menu.buildFromTemplate([
+    const contextMenu = Menu.buildFromTemplate([
       {
-        label: 'Quit',
-        click() { app.quit(); }
+        label: 'Quit', click: () => {
+          // electron destroy tray, window and quit app
+          tray.destroy();
+          browserWindow.destroy();
+          app.quit();
+        }
       }
-    ]);
-    tray.popUpContextMenu(menu)
+    ])
+
+    tray.popUpContextMenu(contextMenu)
   })
 })
-
-
-
-const toggleWindow = () => {
-  if (mainWindow.isVisible()) return mainWindow.hide();
-  // mainWindow.webContents.openDevTools()
-  return mainWindow.show();
-};
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
