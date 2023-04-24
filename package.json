@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "electron-traywindow-positioner": "^1.1.1",
-    "menubar": "^9.2.3"
+    "ip": "^1.1.8",
+    "menubar": "^9.2.3",
+    "public-ip": "^6.0.1"
   },
   "name": "cupcake",
   "description": "",

@@ -1,7 +1,7 @@
 // main.js
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, Tray } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, Menu, Tray } = require('electron');
+const path = require('path');
 
 let tray = null;
 let browserWindow = null;
@@ -11,11 +11,9 @@ const createWindow = () => {
   browserWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
     minWidth: 270,
-    minHeight: 170,
     maxWidth: 270,
-    maxHeight: 170,
+    maxHeight: 150,
     width: 270,
-    height: 170,
     show: false,
     frame: false,
     tray: true,
@@ -24,7 +22,8 @@ const createWindow = () => {
     maximizable: false,
     fullscreenable: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true
     }
   })
 
@@ -46,6 +45,11 @@ app.whenReady().then(() => {
 
   if (app.dock) app.dock.hide();
   createWindow()
+  // const internalIp = ip.address();
+
+  // browserWindow.webContents.executeJavaScript(`
+  //   document.getElementById('ip-address').innerHTML = internalIp;
+  // `)
 
   // const trayBounds = tray.getBounds();
   // const windowBounds = browserWindow.getBounds();
