@@ -14,6 +14,7 @@ const createWindow = () => {
     maxWidth: 270,
     maxHeight: 150,
     width: 270,
+    // transparent: true,
     show: false,
     frame: false,
     tray: true,
@@ -33,7 +34,7 @@ const createWindow = () => {
   browserWindow.hide();
   browserWindow.removeMenu()
   // Open the DevTools.
-  browserWindow.openDevTools({detached: true})
+  browserWindow.openDevTools({ detached: true })
 }
 
 // This method will be called when Electron has finished
@@ -45,21 +46,6 @@ app.whenReady().then(() => {
 
   if (app.dock) app.dock.hide();
   createWindow()
-  // const internalIp = ip.address();
-
-  // browserWindow.webContents.executeJavaScript(`
-  //   document.getElementById('ip-address').innerHTML = internalIp;
-  // `)
-
-  // const trayBounds = tray.getBounds();
-  // const windowBounds = browserWindow.getBounds();
-  // console.log(trayBounds);
-  // console.log(windowBounds);
-  // const x = Math.round(trayBounds.x);
-  // const y = Math.round(trayBounds.y);
-  // console.log(x);
-  // console.log(y);
-  // browserWindow.setPosition(0, y, false);
 
   // position electron window realitive to tray icon
   const positionWindow = () => {
