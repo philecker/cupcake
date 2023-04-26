@@ -13,11 +13,11 @@ function secondsToTimestamp() {
   minutes = minutes < 10 ? "0" + minutes : minutes;
   remainingSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
 
-  return `${hours}:${minutes}:${remainingSeconds}`;
+  return `${hours}h ${minutes}m`;
 }
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ip-address').innerHTML = ip.address();
-  document.getElementById('computer-name').innerHTML = os.hostname();
+  document.getElementById('computer-name').innerHTML = os.userInfo().username;
   document.getElementById('os-version').innerHTML = os.release();
   document.getElementById('last-restart').innerHTML = secondsToTimestamp();
 })

@@ -11,9 +11,9 @@ const createWindow = () => {
   browserWindow = new BrowserWindow({
     useContentSize: true,
     titleBarStyle: 'hidden',
-    minWidth: 270,
-    maxWidth: 270,
-    width: 270,
+    minWidth: 250,
+    maxWidth: 250,
+    width: 250,
     height: 135,
     minHeight: 135,
     backgroundColor: "#ffffff",
