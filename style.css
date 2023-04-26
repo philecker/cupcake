@@ -1,0 +1,31 @@
+/* CSS */
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
+body, html {
+
+  color: rgb(55, 65, 81);
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+li:hover {
+  background-color: #e5e5e5;
+  border-radius: 10px;
+}
+
+span {
+  float: right;
+  font-weight: bold;
+  font-size: 14px;
+}

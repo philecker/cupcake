@@ -9,12 +9,14 @@ let browserWindow = null;
 const createWindow = () => {
   // Create the browser window.
   browserWindow = new BrowserWindow({
+    useContentSize: true,
     titleBarStyle: 'hidden',
     minWidth: 270,
     maxWidth: 270,
-    maxHeight: 150,
     width: 270,
-    // transparent: true,
+    height: 135,
+    minHeight: 135,
+    backgroundColor: "#ffffff",
     show: false,
     frame: false,
     tray: true,
@@ -56,7 +58,7 @@ app.whenReady().then(() => {
     const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
 
     // Position window 4 pixels vertically below the tray icon
-    const y = Math.round(trayBounds.y + trayBounds.height + 4);
+    const y = Math.round(trayBounds.y + trayBounds.height);
 
     browserWindow.setPosition(x, y, false);
   }

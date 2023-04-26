@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="cupcake-label">IP Address: <span id="ip-address"></span></div>
-    <div class="cupcake-label"></div>Last Restart: <span id="last-restart"></span></div>
-    <div class="cupcake-label"></div>Computer Name: <span id="computer-name"></span></div>
-    <div class="cupcake-label"></div>OS Version: <span id="os-version"></span></div>
+    <ul>
+      <li><div class="cupcake-label">Internal IP: <span id="ip-address"></span></div></li>
+      <li><div class="cupcake-label">Last Restart: <span id="last-restart"></span></div></li>
+      <li><div class="cupcake-label">System Name: <span id="computer-name"></span></div></li>
+      <li><div class="cupcake-label">OS Version: <span id="os-version"></span></div></li>
+    </ul>
   </body>
 </html>
