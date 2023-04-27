@@ -49,8 +49,26 @@ app.whenReady().then(() => {
   if (app.dock) app.dock.hide();
   createWindow()
 
-  browserWindow.webContents.on('did-finish-load', ()=>{
-    let code = `var authButton = document.getElementById("itemsList"); authButton.addEventListener("click", (e) => { console.log(e); });`;
+  browserWindow.webContents.on('did-finish-load', () => {
+    let code = `const copyToClipboard = (text) => {
+                  navigator.clipboard.writeText(text).then(() => {
+                    /* clipboard successfully set */
+                    console.log(text);
+                  }, () => {
+                    /* clipboard write failed */
+                  });
+                }
+
+                let listElements = document.getElementById("itemsList");
+                listElements.addEventListener("click", (e) => {
+                  if (e.target.nodeName == "DIV") {
+                    const copiedValue = e.target.querySelector("span").innerHTML;
+                    copyToClipboard(copiedValue);
+                  } else {
+                    const copiedValue = e.target.parentNode.querySelector("span").innerHTML;
+                    copyToClipboard(copiedValue);
+                  }
+                });`;
     browserWindow.webContents.executeJavaScript(code);
   });
 

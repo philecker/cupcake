@@ -2,15 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <ul id="itemsList">
-      <li onclick="(e) => { console.log(e) }"><div class="cupcake-label">Internal IP: <img src="copy.png" /><span id="ip-address"></span></div></li>
+      <li><div class="cupcake-label">Internal IP: <img src="copy.png" /><span id="ip-address"></span></div></li>
       <li><div class="cupcake-label">Last Restart: <img src="copy.png" /><span id="last-restart"></span></div></li>
       <li><div class="cupcake-label">Username: <img src="copy.png" /><span id="computer-name"></span></div></li>
       <li><div class="cupcake-label">OS Version: <img src="copy.png" /><span id="os-version"></span></div></li>
