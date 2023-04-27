@@ -15,9 +15,23 @@ function secondsToTimestamp() {
 
   return `${hours}h ${minutes}m`;
 }
+
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ip-address').innerHTML = ip.address();
   document.getElementById('computer-name').innerHTML = os.userInfo().username;
   document.getElementById('os-version').innerHTML = os.release();
   document.getElementById('last-restart').innerHTML = secondsToTimestamp();
-})
+});
+
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text).then(() => {
+    /* clipboard successfully set */
+    console.log("copied");
+  }, () => {
+    /* clipboard write failed */
+  });
+}
+
+document.getElementsByClassName('cupcake-label').addEventListener('click', () => {
+  console.log("clicked");
+});

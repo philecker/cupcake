@@ -21,6 +21,7 @@ li {
 li:hover {
   background-color: #e5e5e5;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 span {

@@ -49,6 +49,11 @@ app.whenReady().then(() => {
   if (app.dock) app.dock.hide();
   createWindow()
 
+  browserWindow.webContents.on('did-finish-load', ()=>{
+    let code = `var authButton = document.getElementById("itemsList"); authButton.addEventListener("click", (e) => { console.log(e); });`;
+    browserWindow.webContents.executeJavaScript(code);
+  });
+
   // position electron window realitive to tray icon
   const positionWindow = () => {
     const windowBounds = browserWindow.getBounds();
@@ -62,8 +67,6 @@ app.whenReady().then(() => {
 
     browserWindow.setPosition(x, y, false);
   }
-
-
 
   tray.on('click', () => {
     if (browserWindow.isVisible()) {
