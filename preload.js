@@ -1,5 +1,6 @@
 const ip = require("ip");
 const os = require("os");
+
 // All the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 
@@ -17,8 +18,13 @@ function secondsToTimestamp() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('ip-address').innerHTML = ip.address();
-  document.getElementById('computer-name').innerHTML = os.userInfo().username;
-  document.getElementById('os-version').innerHTML = os.release();
-  document.getElementById('last-restart').innerHTML = secondsToTimestamp();
+  const setInnerHtml = async () => {
+    // do something else here after firstFunction completes
+    document.getElementById('ip-address').innerHTML = ip.address();
+    document.getElementById('computer-name').innerHTML = os.userInfo().username;
+    document.getElementById('os-version').innerHTML = os.release();
+    document.getElementById('last-restart').innerHTML = secondsToTimestamp();
+  }
+
+  setInnerHtml();
 });

@@ -14,8 +14,8 @@ const createWindow = () => {
     minWidth: 250,
     maxWidth: 250,
     width: 250,
-    height: 135,
-    minHeight: 135,
+    height: 140,
+    minHeight: 140,
     backgroundColor: "#ffffff",
     show: false,
     frame: false,
@@ -53,7 +53,7 @@ app.whenReady().then(() => {
     let code = `const copyToClipboard = (text) => {
                   navigator.clipboard.writeText(text).then(() => {
                     /* clipboard successfully set */
-                    console.log(text);
+
                   }, () => {
                     /* clipboard write failed */
                   });
