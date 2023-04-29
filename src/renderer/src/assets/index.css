@@ -38,7 +38,7 @@ span {
   font-size: 14px;
 }
 
-li img {
+li img.copyIcon {
   width: 15px;
   height: 15px;
   opacity: .5;
