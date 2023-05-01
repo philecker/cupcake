@@ -23,12 +23,13 @@ const createWindow = () => {
     maximizable: false,
     fullscreenable: false,
     webPreferences: {
-      preload: join(__dirname, 'preload.js'),
-      nodeIntegration: true
+      // preload: join(__dirname, './../preload/index.js'),
+      nodeIntegration: true,
+      sandbox: false
     }
   })
 
-  browserWindow.loadFile('./src/renderer/index.html')
+  browserWindow.loadFile(join(__dirname, '../renderer/index.html'))
   browserWindow.setMenu(null)
   browserWindow.hide()
   browserWindow.removeMenu()
@@ -36,33 +37,34 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
+  app.setAppUserModelId('com.electron')
   tray = new Tray(nativeImage.createFromPath(trayIcon))
   tray.setToolTip('Cupcake')
 
   if (app.dock) app.dock.hide()
   createWindow()
 
-  // browserWindow.webContents.on('did-finish-load', () => {
-  //   let code = `const copyToClipboard = (text) => {
-  //                 navigator.clipboard.writeText(text).then(() => {
+  browserWindow.webContents.on('did-finish-load', () => {
+    let code = `const copyToClipboard = (text) => {
+                  navigator.clipboard.writeText(text).then(() => {
 
-  //                 }, () => {
+                  }, () => {
 
-  //                 });
-  //               }
+                  });
+                }
 
-  //               let listElements = document.getElementById("itemsList");
-  //               listElements.addEventListener("click", (e) => {
-  //                 if (e.target.nodeName == "DIV") {
-  //                   const copiedValue = e.target.querySelector("span").innerHTML;
-  //                   copyToClipboard(copiedValue);
-  //                 } else {
-  //                   const copiedValue = e.target.parentNode.querySelector("span").innerHTML;
-  //                   copyToClipboard(copiedValue);
-  //                 }
-  //               });`
-  //   browserWindow.webContents.executeJavaScript(code)
-  // })
+                let listElements = document.getElementById("itemsList");
+                listElements.addEventListener("click", (e) => {
+                  if (e.target.nodeName == "div") {
+                    const copiedValue = e.target.querySelector("span").innerHTML;
+                    copyToClipboard(copiedValue);
+                  } else {
+                    const copiedValue = e.target.parentNode.querySelector("span").innerHTML;
+                    copyToClipboard(copiedValue);
+                  }
+                });`
+    browserWindow.webContents.executeJavaScript(code)
+  })
 
   // position electron window realitive to tray icon
   const positionWindow = () => {
@@ -88,7 +90,6 @@ app.whenReady().then(() => {
       {
         label: 'Quit',
         click: () => {
-          // electron destroy tray, window and quit app
           tray.destroy()
           browserWindow.destroy()
           app.quit()
