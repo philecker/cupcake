@@ -23,7 +23,7 @@ const createWindow = () => {
     maximizable: false,
     fullscreenable: false,
     webPreferences: {
-      // preload: join(__dirname, './../preload/index.js'),
+      preload: join(__dirname, './../preload/index.js'),
       nodeIntegration: true,
       sandbox: false
     }
