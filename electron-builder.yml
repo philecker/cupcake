@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: cupcake-vite
+productName: Cupcake
 directories:
   buildResources: build
 files:
