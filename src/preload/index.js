@@ -1,13 +1,6 @@
 import { address } from 'ip';
 import { uptime, userInfo, release } from 'os'
 import store from 'store'
-import http from 'http'
-
-const requestListener = function (req, res) {
-  res.end("Your IP Addresss is: " + req.socket.localAddress);
-};
-
-
 
 const cupcakeUsername = userInfo().username;
 const cupcakeOsVersion = release();
@@ -29,6 +22,5 @@ store.set('cupcakeInfo', {
   cupcakeUsername,
   cupcakeOsVersion,
   cupcakeIp,
-  // cupcakeExternalIp,
   cupcakeUptime
 })

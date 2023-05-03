@@ -1,4 +1,4 @@
-# cupcake-vite
+# Cupcake
 
 An Electron application with React
 
