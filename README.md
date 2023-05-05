@@ -1,6 +1,6 @@
 # Cupcake
 
-An Electron application with React
+An Electron application built with React & Vite for easy access to some useful network/system information.
 
 ## Recommended IDE Setup
 
@@ -23,12 +23,9 @@ $ npm run dev
 ### Build
 
 ```bash
-# For windows
-$ npm run build:win
-
 # For macOS
 $ npm run build:mac
 
-# For Linux
-$ npm run build:linux
+# # For windows
+# $ npm run build:win
 ```
