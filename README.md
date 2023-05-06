@@ -29,3 +29,5 @@ $ npm run build:mac
 # # For windows
 # $ npm run build:win
 ```
+
+[Cupcake icon created by Freepik - Flaticon](https://www.flaticon.com/free-icon/cupcake_1145461?term=cupcake&page=1&position=32&origin=search&related_id=1145461)
